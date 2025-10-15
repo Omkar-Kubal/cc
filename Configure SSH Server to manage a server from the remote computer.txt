@@ -1,0 +1,55 @@
+Configure SSH Server to manage a server from the remote computer (Practical No. 4)
+
+----------Server-------------
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get install openssh-server 
+sudo nano /etc/ssh/ssh_config
+
+after opening file there will be mentioned port 22 uncomment that 
+
+Port 22
+MaxAuthTries 4
+
+sudo service ssh status
+
+ifconfig 
+(get your pc ip address)
+
+Open windows of computer cmd
+ping 192.168.61.128
+
+
+sudo nano /etc/ssh/ssh_config
+
+Open putty after downloading
+
+In hostname add ip 
+port 22
+connection type ssh
+click on open
+then accept
+
+A Terminal will open with a login prompt. Enter the username and password of the remote server user.
+
+ls
+cd downloads
+ls
+touch testfiledemo
+ls
+cd
+ls
+ls -l
+
+---------------CLIENT----------------
+
+ssh (name user)@192.169.69.10 -p22
+ls
+cd downloads
+ls
+touch hello
+ls
+cd 
+ls
+

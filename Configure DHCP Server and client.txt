@@ -1,0 +1,60 @@
+Configure DHCP Server and client (Practical No.1)
+
+-----------------------------server---------------------------- 
+
+ifconfig
+
+sudo nano /etc/default/isc-dhcp-server
+(interfaces ="ens33")
+
+cd /etc/dhcp
+ls
+sudo nano /etc/dhcp/dhcpd.conf
+
+comment
+#option domainname 2 lines
+
+uncomment
+authoritative;
+
+uncomment whole subnet ip part
+
+subnet 192.168.173.0 netmask 255.255.255.0 { range 192.168.173.100 192.168.173.200;
+#option domain-name-servers ns1.internal.example.org; #option domain-name "internal.example.org";
+option subnet-mask 255.255.255.0;
+option routers 192.168.173.255;
+option broadcast-address 192.168.173.255;
+default-lease-time 600;
+max-lease-time 7200;  (update according to your ip)
+
+sudo systemctl start isc-dhcp-server
+sudo systemctl status isc-dhcp-server
+sudo systemctl enable isc-dhcp-server
+sudo ufw status
+dhcp-lease-list
+ls
+
+-----------------------------client------------------------
+
+sudo nano /etc/network/interfaces
+ip a
+
+sudo nano /etc/network/interfaces
+(after opening the above file, 5 lines should be there as below
+#interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+auto ens33
+iface ens33 inet dhcp)
+
+sudo systemctl restart networking
+ip a
+
+
+-------back to server------
+cd
+cd /etc/dhcp
+dhcpd
+sudo nano /var/lib/dhcp/dhcpd.leases
+sudo nano /etc/dhcp/dhcpd.conf
+sudo nano /etc/default/isc-dhcp-server

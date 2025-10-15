@@ -1,0 +1,48 @@
+3. Configure NTPd(Server) Configure NTP Client. (Practical No. 3)
+--------------server-------------
+sudo apt-get update
+
+sudo apt-get install ntp
+
+sudo nano /etc/ntp.conf
+
+after opening comment the lines 
+pool 0.ubuntu.pool.ntp.org iburst
+pool 1.ubuntu.pool.ntp.org iburst
+pool 2.ubuntu.pool.ntp.org iburst
+pool 3.ubuntu.pool.ntp.org iburst
+
+and write 
+
+server 0.europe.pool.ntp.org
+server 1.europe.pool.ntp.org
+server 2.europe.pool.ntp.org
+server 3.europe.pool.ntp.org
+
+sudo systemctl restart ntp
+sudo systemctl status ntp
+
+sudo ufw allow ntp
+sudo ufw reload 
+sudo ufw allow 123/ntp
+sudo ufw allow ntp
+sudo ufw reload
+
+
+-------------client-----------------
+
+sudo apt update -y
+sudo apt install ntpdate
+sudo vim /etc/hosts
+sudo nano /etc/hosts
+sudo nano /etc/ntp.conf
+sudo apt install ntp
+
+sudo nano /etc/ntp.conf
+
+comment pool 4 lines, and below that add
+
+server ntpserver
+sudo systemctl enable ntp
+sudo systemctl restart ntp
+ntpq -p

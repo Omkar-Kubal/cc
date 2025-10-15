@@ -1,0 +1,71 @@
+1. Configure LDAP Server to Add LDAP User Accounts in the OpenLDAP Server.
+
+Steps: 
+1. Install slapd — Stand alone LDAP daemon 
+
+sudo apt-get update
+sudo apt-get install slapd ldap-utils 
+
+2. Enter administrator password: cs 
+
+3. Validate the slapd status
+
+systemctl status slapd
+
+4. Configure the openLDAP server post installation 
+
+sudo dpkg-reconfigure slapd
+
+1.Omit openLDAP configuration? No 
+2.DNS domain name. Enter the domain name - example.com
+3.Organization name : Enter your organization name - Example
+4.Administrator password. Set the same administrator password which we did in step 1. - cs 
+5.DataBase : BDB is deprecated. MDB’s read/write capacity is relatively faster. So we choose - MDB
+6.Do you want to remove the Database during purge? -  No
+7.Move old DataBase? Yes 
+8. Allow LDAPv2 protocol? No
+
+5. Let’s test our LDAP connection with ldapwhoami, which should return the username we’re connected as:
+
+ldapwhoami -H ldap:// -x
+
+6. Configure LDAP clients
+
+sudo nano /etc/ldap/ldap.conf
+
+The file will open inside that see below command if not there then add
+
+BASE dc=example,dc=com
+URI ldap://localhost
+
+7. Testing the server
+
+ldapsearch -x
+
+8. Installing phpldapadmin
+
+sudo apt install phpldapadmin
+
+9. Configure phpldapadmin
+
+sudo nano /etc/phpldapadmin/config.php (pdf - LSAprac 7 page no.6-9)
+
+After file opens first
+
+Set your time zone accordingly 
+
+$config->custom->appearance['timezone'] = 'Asia/Kolkata';
+
+Set the server name, Provide your ip address(run ifconfig) and set the hide template warningto true., Disable anonymous login.
+
+(see pdf for above)
+
+Login to your phpldapadmin UI. 
+
+in browser add ip address (eg: 192.168.61.129/phpldapadmin/)
+
+login DN : cn=admin,dc=example,dc=com
+Password : cs
+
+
+

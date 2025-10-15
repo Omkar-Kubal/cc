@@ -1,0 +1,42 @@
+2. Install MySQL to configure database server, install phpMyAdmin to operate MySQL on web browser from Clients. ((Practical No.9))
+
+sudo apt-get install apache2
+
+then in files computer there will be folder named var inside that index.html open it will show it works
+
+sudo chmod -R 777 /var/www/html
+
+Where index.html is present create a file named test.html inside that write name (for eg: Johny Daniels T069)
+
+sudo apt-get install php
+
+sudo service apache2 restart
+
+in the above index.html and test.html is present create test.php in that write
+
+<?php
+phpinfo();
+?>
+
+sudo apt install libapache2-mod-php
+
+then in browser run localhost/test.php
+
+sudo apt-get install mysql-server mysql-client
+
+add password
+
+MySQL -u root -p
+exit
+
+sudo apt-get install phpMyAdmin
+
+select apache2
+no
+
+sudo service apache2 restart
+
+in browser: localhost/phpmyadmin/
+ enter username password 
+
+Click on databases and create a database 
